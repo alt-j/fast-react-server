@@ -1,6 +1,6 @@
 {
   "name": "react-server-rendering",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Fast server react rendering (advanced performance render)",
   "main": "index.js",
   "repository": {
@@ -19,5 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "node.extend": "1.1.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

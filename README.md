@@ -1,0 +1,39 @@
+# [React] Server rendering
+Module for super fast server react rendering.
+
+## Quick start
+```
+npm install react-server-rendering
+```
+
+```
+var react = require('react-server-rendering');
+
+// All declarations must be transformed from jsx to js.
+// Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
+var component = react.createClass({
+    getDefaultProps: function () {
+        return {
+            content: 'Some <b>bold</b> text'
+        };
+    },
+
+    render: function () {
+        return React.createElement('div', {
+            className: 'text',
+            dangerouslySetInnerHTML: { __html: this.props.content }
+        });
+    }
+})
+
+// After that all declarations transformed to the functions,
+// which receive props and returns string.
+console.log(react.createElement(component));
+```
+
+
+## What's inside?
+High speed mock for react, which doesn't use any abstraction and transform all of your declarations to html (string) generators.
+
+For the sake of speed, wasn't implemented some features:
+- Context.
