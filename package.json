@@ -1,0 +1,23 @@
+{
+  "name": "react-server-rendering",
+  "version": "0.0.1",
+  "description": "Fast server react rendering (advanced performance render)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alt-j/react-server-rendering.git"
+  },
+  "keywords": [
+    "react",
+    "render",
+    "server",
+    "perfomance",
+    "optimization",
+    "speed"
+  ],
+  "author": "Andrey Morozov <alt-j@yandex-team.ru>",
+  "license": "MIT",
+  "dependencies": {
+    "node.extend": "1.1.0"
+  }
+}
