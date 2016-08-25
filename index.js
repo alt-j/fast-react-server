@@ -51,12 +51,10 @@ module.exports = {
         }
 
         var content = '';
-        if (children) {
-            content = [].slice.call(arguments, 2).map(function (part) {
-                return part.indexOf(REACT_MARK) !== 0 ? escapeHtml(part) : part;
-            }).join('');
-        } else if (props.dangerouslySetInnerHTML) {
+        if (props.dangerouslySetInnerHTML) {
             content = props.dangerouslySetInnerHTML.__html;
+        } else if (children) {
+            content = renderChildren([].slice.call(arguments, 2));
         }
 
         return REACT_MARK + '<' + element + renderAttrs(props) + '>' + content + '</' + element + '>';
@@ -72,6 +70,19 @@ module.exports = {
 };
 
 /**
+ * @param {String[]|String[][]} children
+ * @returns {String} html
+ */
+function renderChildren(children) {
+    return children.map(function (child) {
+        return Array.isArray(child) ?
+            renderChildren(child) :
+            (child.indexOf(REACT_MARK) !== 0 ? escapeHtml(child) : child);
+    }).join('');
+}
+
+
+/**
  * @param {Object} attrs
  * @returns {String} str
  */
@@ -79,7 +90,8 @@ function renderAttrs(attrs) {
     var str = '';
 
     Object.keys(attrs).forEach(function (key) {
-        var value = attrs[key];
+        var value = (key === 'style' && typeof attrs[key] === 'object') ?
+            hashToString(attrs[key]) : attrs[key];
 
         if (!value ||
             key === 'key' ||
@@ -103,6 +115,16 @@ function renderAttrs(attrs) {
     });
 
     return str;
+}
+
+/**
+ * @param {Object} hash
+ * @returns {String} result
+ */
+function hashToString(hash) {
+    return Object.keys(hash).reduce(function (str, key) {
+        return str + key + ': ' + hash[key] + ';';
+    }, '');
 }
 
 /**
