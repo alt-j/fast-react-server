@@ -26,7 +26,6 @@ module.exports = {
             var instance = extend({}, instanceBlank);
 
             extend(instance.props, props);
-            instance.setState = instance.setState.bind(instance);
 
             if (instance.componentWillMount) {
                 instance.componentWillMount();
@@ -39,22 +38,29 @@ module.exports = {
     /**
      * @param {Function|String} element Renderer function or name of tag.
      * @param {Object} [props] Properties list.
-     * @param {String} [children] Children.
+     * @param {String} [child] Child.
      * @returns {String} html
      */
-    createElement: function (element, props, children) {
+    createElement: function (element, props, child) {
         props = props || {};
 
         if (typeof element !== 'string') {
-            var params = extend({children: children}, props);
+            var params = extend({children: child}, props);
             return element && element(params);
         }
 
         var content = '';
         if (props.dangerouslySetInnerHTML) {
             content = props.dangerouslySetInnerHTML.__html;
-        } else if (children) {
-            content = renderChildren([].slice.call(arguments, 2));
+        } else if (child) {
+            var children = [];
+
+            var i = arguments.length;
+            while (i-- > 2) {
+                children[i] = arguments[i];
+            }
+
+            content = renderChildren(children);
         }
 
         return REACT_MARK + '<' + element + renderAttrs(props) + '>' + content + '</' + element + '>';
@@ -74,11 +80,20 @@ module.exports = {
  * @returns {String} html
  */
 function renderChildren(children) {
-    return children.map(function (child) {
-        return Array.isArray(child) ?
-            renderChildren(child) :
-            (child.indexOf(REACT_MARK) !== 0 ? escapeHtml(child) : child);
-    }).join('');
+    var str = '';
+
+    for (var i = 0; i < children.length; i++) {
+        var child = children[i];
+        if (Array.isArray(child)) {
+            str += renderChildren(child);
+        } else if (typeof child === 'number') {
+            str += child;
+        } else if (typeof child === 'string') {
+            str += child.indexOf(REACT_MARK) === 0 ? child : escapeHtml(child);
+        }
+    }
+
+    return str;
 }
 
 
@@ -89,7 +104,9 @@ function renderChildren(children) {
 function renderAttrs(attrs) {
     var str = '';
 
-    Object.keys(attrs).forEach(function (key) {
+    var keys = Object.keys(attrs);
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
         var value = (key === 'style' && typeof attrs[key] === 'object') ?
             hashToString(attrs[key]) : attrs[key];
 
@@ -97,7 +114,7 @@ function renderAttrs(attrs) {
             key === 'key' ||
             ATTRS_TYPES.indexOf(typeof value) === -1
         ) {
-            return;
+            continue;
         }
 
         var attr = key;
@@ -107,12 +124,12 @@ function renderAttrs(attrs) {
             attr = 'class';
         }
 
-        str += ' ' + attr.toLowerCase();
+        str += ' ' + attr;
 
         if (typeof value !== 'boolean') {
             str += '="' + escapeAttr(value) + '"';
         }
-    });
+    }
 
     return str;
 }
@@ -122,9 +139,14 @@ function renderAttrs(attrs) {
  * @returns {String} result
  */
 function hashToString(hash) {
-    return Object.keys(hash).reduce(function (str, key) {
-        return str + key + ': ' + hash[key] + ';';
-    }, '');
+    var str = '';
+
+    var keys = Object.keys(hash);
+    for (var i = 0; i < keys.length; i++) {
+        str += keys[i] + ': ' + hash[keys[i]] + ';';
+    }
+
+    return str;
 }
 
 /**
@@ -132,13 +154,9 @@ function hashToString(hash) {
  * @returns {String} result
  */
 function escapeAttr(value) {
-    if (value.indexOf('&') !== -1) {
-        value = value.replace(/&/g, '&amp;');
-    }
-    if (value.indexOf('"') !== -1) {
-        value = value.replace(/"/g, '&quot;');
-    }
-    return value;
+    return value
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;');
 }
 
 /**
@@ -149,8 +167,5 @@ function escapeHtml(value) {
     return String(value)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#x27;')
-        .replace(/\//g, '&#x2F;');
+        .replace(/>/g, '&gt;');
 }
