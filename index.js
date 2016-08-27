@@ -1,7 +1,10 @@
-var extend = require('node.extend');
-
 var REACT_MARK = '<!---->';
 var ATTRS_TYPES = ['string', 'boolean', 'number'];
+
+var extend = require('./utils/extend');
+
+var escapeHtml = require('./utils/escape/html');
+var escapeAttr = require('./utils/escape/attr');
 
 module.exports = {
     /**
@@ -9,23 +12,24 @@ module.exports = {
      * @returns {Function} render
      */
     createClass: function (decl) {
-        var instanceBlank = extend({}, decl, {
-            props: extend({}, decl.getDefaultProps ? decl.getDefaultProps() : {}),
+        var instanceBlank = extend(decl, {
+            props: decl.getDefaultProps ? decl.getDefaultProps() : {},
             state: decl.getInitialState ? decl.getInitialState() : {},
             context: {},
 
             setState: function (data) {
-                extend(this.state, data);
+                this.state = extend(this.state, data);
             }
         });
 
         /**
          * @param {Object} [props] Properties list.
+         * @returns {String} html
          */
         return function (props) {
-            var instance = extend({}, instanceBlank);
+            var instance = extend(instanceBlank);
 
-            extend(instance.props, props);
+            instance.props = extend(instance.props, props);
 
             if (instance.componentWillMount) {
                 instance.componentWillMount();
@@ -96,7 +100,6 @@ function renderChildren(children) {
     return str;
 }
 
-
 /**
  * @param {Object} attrs
  * @returns {String} str
@@ -104,9 +107,7 @@ function renderChildren(children) {
 function renderAttrs(attrs) {
     var str = '';
 
-    var keys = Object.keys(attrs);
-    for (var i = 0; i < keys.length; i++) {
-        var key = keys[i];
+    for (var key in attrs) {
         var value = (key === 'style' && typeof attrs[key] === 'object') ?
             hashToString(attrs[key]) : attrs[key];
 
@@ -140,32 +141,8 @@ function renderAttrs(attrs) {
  */
 function hashToString(hash) {
     var str = '';
-
-    var keys = Object.keys(hash);
-    for (var i = 0; i < keys.length; i++) {
-        str += keys[i] + ': ' + hash[keys[i]] + ';';
+    for (var key in hash) {
+        str += key + ': ' + hash[key] + ';';
     }
-
     return str;
-}
-
-/**
- * @param {String} value
- * @returns {String} result
- */
-function escapeAttr(value) {
-    return value
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;');
-}
-
-/**
- * @param {String} value
- * @returns {String} result
- */
-function escapeHtml(value) {
-    return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
 }

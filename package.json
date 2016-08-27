@@ -1,6 +1,6 @@
 {
   "name": "react-server-rendering",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Fast server react rendering (advanced performance render)",
   "main": "index.js",
   "repository": {
@@ -17,9 +17,6 @@
   ],
   "author": "Andrey Morozov <alt-j@yandex-team.ru>",
   "license": "MIT",
-  "dependencies": {
-    "node.extend": "1.1.0"
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   }

@@ -1,6 +1,6 @@
 # [React] Server render
 
-The module for rendering react-element in the server, which faster than [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode), almost seven times (see [benchmarks](https://github.com/alt-j/react-server-benchmark)).
+The module for rendering react-element in the server, which faster than [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode), **more than ten times** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)).
 
 ## Quick start
 ```
@@ -37,4 +37,5 @@ console.log(react.createElement(component));
 High speed mock for react, which doesn't use any abstraction and transform all of your declarations to html (string) generators.
 
 For the sake of speed, wasn't implemented some features:
-- Context.
+- Context;
+- extending components.
