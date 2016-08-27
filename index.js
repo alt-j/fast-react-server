@@ -36,7 +36,7 @@ module.exports = {
         return function (props) {
             var instance = extend(instanceBlank);
 
-            instance.props = instance.props ? extend(instance.props, props) : props;
+            instance.props = extend(instance.props, props);
 
             if (instance.componentWillMount) {
                 instance.componentWillMount();
@@ -55,26 +55,30 @@ module.exports = {
     createElement: function (element, props, child) {
         props = props || {};
 
-        if (typeof element !== 'string') {
-            var params = extend({children: child}, props);
+        if (typeof element === 'string') {
+            var content = '';
+            if (props.dangerouslySetInnerHTML) {
+                content = props.dangerouslySetInnerHTML.__html;
+            } else if (child) {
+                var children = [];
+
+                var i = arguments.length;
+                while (i-- > 2) {
+                    children[i] = arguments[i];
+                }
+
+                content = renderChildren(children);
+            }
+
+            return REACT_MARK + '<' + element + renderAttrs(props) + '>' + content + '</' + element + '>';
+        } else if (typeof element === 'function') {
+            var params = extend(props);
+            params.children = child;
+
             return element && element(params);
         }
 
-        var content = '';
-        if (props.dangerouslySetInnerHTML) {
-            content = props.dangerouslySetInnerHTML.__html;
-        } else if (child) {
-            var children = [];
-
-            var i = arguments.length;
-            while (i-- > 2) {
-                children[i] = arguments[i];
-            }
-
-            content = renderChildren(children);
-        }
-
-        return REACT_MARK + '<' + element + renderAttrs(props) + '>' + content + '</' + element + '>';
+        return '';
     },
 
     /**
@@ -95,12 +99,12 @@ function renderChildren(children) {
 
     for (var i = 0; i < children.length; i++) {
         var child = children[i];
-        if (Array.isArray(child)) {
+        if (typeof child === 'string') {
+            str += child.indexOf(REACT_MARK) === 0 ? child : escapeHtml(child);
+        } else if (Array.isArray(child)) {
             str += renderChildren(child);
         } else if (typeof child === 'number') {
             str += child;
-        } else if (typeof child === 'string') {
-            str += child.indexOf(REACT_MARK) === 0 ? child : escapeHtml(child);
         }
     }
 
@@ -115,8 +119,7 @@ function renderAttrs(attrs) {
     var str = '';
 
     for (var key in attrs) {
-        var value = (key === 'style' && typeof attrs[key] === 'object') ?
-            styleToString(attrs[key]) : attrs[key];
+        var value = key === 'style' ? styleToString(attrs[key]) : attrs[key];
 
         if (!value ||
             key === 'key' ||
@@ -135,7 +138,7 @@ function renderAttrs(attrs) {
         str += ' ' + attr;
 
         if (typeof value !== 'boolean') {
-            str += '="' + escapeAttr(value) + '"';
+            str += '="' + (typeof value === 'string' ? escapeAttr(value) : value) + '"';
         }
     }
 
