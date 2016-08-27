@@ -1,6 +1,6 @@
 {
   "name": "react-server-rendering",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Fast server react rendering (advanced performance render)",
   "main": "index.js",
   "repository": {

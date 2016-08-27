@@ -6,6 +6,8 @@ var extend = require('./utils/extend');
 var escapeHtml = require('./utils/escape/html');
 var escapeAttr = require('./utils/escape/attr');
 
+var dasherize = require('./utils/dasherize');
+
 module.exports = {
     /**
      * @param {Object} decl React component declaration.
@@ -109,7 +111,7 @@ function renderAttrs(attrs) {
 
     for (var key in attrs) {
         var value = (key === 'style' && typeof attrs[key] === 'object') ?
-            hashToString(attrs[key]) : attrs[key];
+            styleToString(attrs[key]) : attrs[key];
 
         if (!value ||
             key === 'key' ||
@@ -136,13 +138,13 @@ function renderAttrs(attrs) {
 }
 
 /**
- * @param {Object} hash
+ * @param {Object} style
  * @returns {String} result
  */
-function hashToString(hash) {
+function styleToString(style) {
     var str = '';
-    for (var key in hash) {
-        str += key + ': ' + hash[key] + ';';
+    for (var property in style) {
+        str += dasherize(property) + ': ' + style[property] + ';';
     }
     return str;
 }
