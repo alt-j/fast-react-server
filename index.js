@@ -14,7 +14,7 @@ module.exports = {
      * @returns {Function} render
      */
     createClass: function (decl) {
-        var instanceBlank = extend(decl, {
+        var executedDecl = {
             props: decl.getDefaultProps ? decl.getDefaultProps() : {},
             state: decl.getInitialState ? decl.getInitialState() : {},
             context: {},
@@ -22,7 +22,10 @@ module.exports = {
             setState: function (data) {
                 this.state = extend(this.state, data);
             }
-        });
+        };
+
+        var mixins = Array.isArray(decl.mixins) ? decl.mixins : [];
+        var instanceBlank = extend.apply(this, mixins.concat([decl, executedDecl]));
 
         /**
          * @param {Object} [props] Properties list.

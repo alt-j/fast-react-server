@@ -37,5 +37,4 @@ console.log(react.createElement(component));
 High speed mock for react, which doesn't use any abstraction and transform all of your declarations to html (string) generators.
 
 For the sake of speed, wasn't implemented some features:
-- Context;
-- extending components.
+- Context.
