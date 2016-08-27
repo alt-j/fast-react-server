@@ -1,6 +1,6 @@
 # [React] Server render
 
-The module for rendering react-element in the server **11 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
+The module for rendering react-element in the server **12 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
 
 ## Quick start
 ```
