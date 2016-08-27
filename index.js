@@ -1,4 +1,6 @@
 var REACT_MARK = '<!---->';
+var REACT_MARK_PATTERN = new RegExp(REACT_MARK, 'g');
+
 var ATTRS_TYPES = ['string', 'boolean', 'number'];
 
 var extend = require('./utils/extend');
@@ -34,7 +36,7 @@ module.exports = {
         return function (props) {
             var instance = extend(instanceBlank);
 
-            instance.props = extend(instance.props, props);
+            instance.props = instance.props ? extend(instance.props, props) : props;
 
             if (instance.componentWillMount) {
                 instance.componentWillMount();
@@ -80,7 +82,7 @@ module.exports = {
      * @returns {String} html Code without extra symbols, which use during the rendering.
      */
     cleanHtml: function (html) {
-        return html.replace(new RegExp(REACT_MARK, 'g'), '');
+        return html.replace(REACT_MARK_PATTERN, '');
     }
 };
 
