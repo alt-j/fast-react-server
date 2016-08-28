@@ -7,10 +7,10 @@ module.exports = function (source) {
 
     var i = 0;
     while (i < arguments.length) {
-        var source = arguments[i++];
+        var object = arguments[i++];
 
-        for (var key in source) {
-            result[key] = source[key];
+        for (var key in object) {
+            result[key] = object[key];
         }
     }
 
