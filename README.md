@@ -13,30 +13,22 @@ npm install react-server-rendering
 ```
 
 ```js
-var react = require('react-server-rendering');
+var React = require('react-server-rendering');
 
-// All declarations must be transformed from jsx to js.
-// Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
-var component = react.createClass({
-    getDefaultProps: function () {
-        return {
-            content: 'Some <b>bold</b> text'
-        };
-    },
-
-    render: function () {
-        return React.createElement('div', {
-            className: 'text',
-            dangerouslySetInnerHTML: { __html: this.props.content }
-        });
-    }
-})
-
-// After that all declarations transformed to the functions,
-// which receive props and returns string.
-console.log(react.createElement(component));
+var element = React.createElement(Component, {property: 'value'});
+console.log(React.renderToString(element));
 ```
 
+See examples of using: [examples](examples/).
+
+## Cache
+
+React server rendering support cache for component.
+
+First of all, you must choose cache system. It can be any system, which implement ICache interface ([interface](src/interfaces/i-cache.js)).
+For caching, component must implement ICacheableComponent interface ([interface](src/interfaces/i-cacheable-component.js)).
+
+Example with using LRU cache: [render with LRU cache](examples/cache-render.js) (install `lru-cache` package first).
 
 ## What's inside?
 High speed mock for react, which doesn't use any abstraction and transform all of your declarations to html (string) generators.

@@ -2,7 +2,7 @@
   "name": "react-server-rendering",
   "version": "0.0.9",
   "description": "Fast server react rendering (advanced performance render)",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alt-j/react-server-rendering.git"
@@ -13,7 +13,9 @@
     "server",
     "perfomance",
     "optimization",
-    "speed"
+    "speed",
+    "cache",
+    "html"
   ],
   "author": "Andrey Morozov <alt-j@yandex-team.ru>",
   "license": "MIT",
@@ -34,6 +36,7 @@
     "git-hooks": "1.1.0",
     "istanbul": "0.4.5",
     "mocha": "3.0.2",
-    "mocha-lcov-reporter": "1.2.0"
+    "mocha-lcov-reporter": "1.2.0",
+    "lru-cache": "4.0.1"
   }
 }
