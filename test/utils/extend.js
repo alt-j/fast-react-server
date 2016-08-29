@@ -28,10 +28,6 @@ describe('extend', function () {
         expect(extend()).to.deep.equal({});
     });
 
-    it('without arguments should return an object', function () {
-        expect(extend(null, {a: 1})).to.deep.equal({a: 1});
-    });
-
     it('should merge object with object', function () {
         var ori = {
             str: 'no shit',
@@ -66,5 +62,26 @@ describe('extend', function () {
     it('should handle null object normally', function () {
         var target = extend(null, obj);
         expect(target).to.deep.equal(obj);
+    });
+
+    it('should merge any count of objects', function () {
+        var ori = {
+            str: 'no shit',
+            integer: 76,
+            arr: [1, 2, 3, 4],
+            date: new Date(81, 7, 26),
+            foo: 'bar'
+        };
+        var target = extend(ori, obj, {str: 'normal', integer: 0}, {integer: 42});
+        var expectedTarget = {
+            str: 'normal',
+            integer: 42,
+            arr: [1, 'what', new Date(81, 8, 4)],
+            date: new Date(81, 4, 13),
+            constructor: 'fake',
+            isPrototypeOf: 'not a function',
+            foo: new Foo()
+        };
+        expect(target).to.deep.equal(expectedTarget);
     });
 });

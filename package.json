@@ -26,11 +26,11 @@
     "lint": "./node_modules/.bin/eslint . --quiet --ignore-path .gitignore"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^3.4.0",
-    "eslint-config-loris": "^5.1.0",
-    "git-hooks": "^1.1.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.0.2"
+    "chai": "3.5.0",
+    "eslint": "3.4.0",
+    "eslint-config-loris": "5.1.0",
+    "git-hooks": "1.1.0",
+    "istanbul": "0.4.5",
+    "mocha": "3.0.2"
   }
 }
