@@ -135,7 +135,7 @@ function renderAttrs(attrs) {
             attr = 'class';
         }
 
-        str += ' ' + attr;
+        str += ' ' + attr.toLowerCase();
 
         if (typeof value !== 'boolean') {
             str += '="' + (typeof value === 'string' ? escapeAttr(value) : value) + '"';
