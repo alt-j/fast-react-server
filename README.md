@@ -3,11 +3,11 @@
 The module for rendering react-element in the server **12 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
 
 ## Quick start
-```
+```sh
 npm install react-server-rendering
 ```
 
-```
+```js
 var react = require('react-server-rendering');
 
 // All declarations must be transformed from jsx to js.

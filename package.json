@@ -19,5 +19,13 @@
   "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint . --quiet"
+  },
+  "devDependencies": {
+    "eslint": "^3.4.0",
+    "eslint-config-loris": "^5.1.0",
+    "git-hooks": "^1.1.0"
   }
 }
