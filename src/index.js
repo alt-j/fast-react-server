@@ -19,7 +19,6 @@ module.exports = {
         var executedDecl = {
             props: decl.getDefaultProps ? decl.getDefaultProps() : {},
             state: decl.getInitialState ? decl.getInitialState() : {},
-            context: {},
 
             setState: function (data) {
                 this.state = extend(this.state, data);
@@ -34,24 +33,35 @@ module.exports = {
 
         /**
          * @param {Object} [props] Properties list.
-         * @param {ICache} [cache] Cache instance.
+         * @param {Object} [options]
+         * @param {ICache} [options.cache] Cache instance.
+         * @param {Object} [options.context] Render context.
          * @returns {String} html
          */
-        return function (props, cache) {
+        return function (props, options) {
             var instance = extend(instanceBlank);
 
             instance.props = extend(instance.props, props);
+            instance.context = (options && options.context) || {};
 
             if (instance.componentWillMount) {
                 instance.componentWillMount();
             }
 
+            var cache = options.cache;
             var cacheKey = cache && hasComponentCache ? componentCachePrefix + instance.getCacheKey() : null;
+
             if (cacheKey && cache.has(cacheKey)) {
                 return cache.get(cacheKey);
             }
 
-            var html = elementToString(instance.render(), cache);
+            var context = typeof instance.getChildContext === 'function' ?
+                extend(instance.context, instance.getChildContext()) : null;
+
+            var html = elementToString(instance.render(), {
+                cache: cache,
+                context: context
+            });
 
             if (cacheKey) {
                 cache.set(cacheKey, html);
@@ -89,8 +99,6 @@ module.exports = {
      * @returns {String} html
      */
     renderToString: function (element, cache) {
-        return elementToString(element, cache);
+        return elementToString(element, {cache: cache});
     }
 };
-
-

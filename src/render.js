@@ -9,10 +9,12 @@ var dasherize = require('./utils/dasherize');
 
 /**
  * @param {RenderElement} element
- * @param {ICache} [cache]
+ * @param {Object} [options]
+ * @param {ICache} [options.cache] Cache instance.
+ * @param {Object} [options.context] Render context.
  * @returns {String} html
  */
-function renderElement(element, cache) {
+function renderElement(element, options) {
     var component = element.component;
 
     var props = element.props;
@@ -23,7 +25,7 @@ function renderElement(element, cache) {
         if (props.dangerouslySetInnerHTML) {
             content = props.dangerouslySetInnerHTML.__html;
         } else if (children.length > 0) {
-            content = renderChildren(children, cache);
+            content = renderChildren(children, options);
         }
 
         return '<' + component + renderAttrs(props) + '>' + content + '</' + component + '>';
@@ -31,7 +33,7 @@ function renderElement(element, cache) {
         var params = extend(props);
         params.children = children[0];
 
-        return component(params, cache);
+        return component(params, options);
     }
 
     return '';
@@ -39,10 +41,12 @@ function renderElement(element, cache) {
 
 /**
  * @param {String[]|String[][]|Number[]|Number[][]} children
- * @param {ICache} [cache]
+ * @param {Object} [options]
+ * @param {ICache} [options.cache] Cache instance.
+ * @param {Object} [options.context] Render context.
  * @returns {String} html
  */
-function renderChildren(children, cache) {
+function renderChildren(children, options) {
     var str = '';
 
     for (var i = 0; i < children.length; i++) {
@@ -50,9 +54,9 @@ function renderChildren(children, cache) {
         if (typeof child === 'string') {
             str += escapeHtml(child);
         } else if (Array.isArray(child)) {
-            str += renderChildren(child, cache);
+            str += renderChildren(child, options);
         } else if (typeof child === 'object') {
-            str += renderElement(child, cache);
+            str += renderElement(child, options);
         } else if (typeof child === 'number') {
             str += child;
         }

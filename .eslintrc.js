@@ -7,6 +7,7 @@ module.exports = {
     },
     rules: {
         strict: 'off',
-        'no-unused-vars': ['error', {args: 'none'}]
+        'no-unused-vars': ['error', {args: 'none'}],
+        'no-console': ['warn']
     }
 };

@@ -8,7 +8,7 @@ var cache = LRU({
 
 // All declarations must be transformed from jsx to js.
 // Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
-var component = React.createClass({
+var Component = React.createClass({
     getDefaultProps: function () {
         return {
             content: 'Some <b>bold</b> text'
@@ -25,11 +25,11 @@ var component = React.createClass({
             dangerouslySetInnerHTML: {__html: this.props.content}
         });
     }
-})
+});
 
 console.log(
     React.renderToString(
-        React.createElement(component),
+        React.createElement(Component),
         cache
     )
 );
@@ -38,7 +38,7 @@ console.log(
 console.log(
     React.renderToString(
         React.createElement(
-            component,
+            Component,
             {content: 'Some <b>bold</b> text'}
         ),
         cache

@@ -2,7 +2,7 @@ var React = require('../src/index');
 
 // All declarations must be transformed from jsx to js.
 // Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
-var component = React.createClass({
+var Component = React.createClass({
     getDefaultProps: function () {
         return {
             content: 'Some <b>bold</b> text'
@@ -17,5 +17,5 @@ var component = React.createClass({
     }
 });
 
-var element = React.createElement(component);
+var element = React.createElement(Component);
 console.log(React.renderToString(element));
