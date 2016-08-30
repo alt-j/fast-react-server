@@ -21,16 +21,19 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "test": "npm run lint && npm run test-client",
-    "test-client": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive --check-leaks",
+    "test": "npm run lint && npm run test-cov",
+    "test-cov": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive --check-leaks",
+    "test-coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint": "./node_modules/.bin/eslint . --quiet --ignore-path .gitignore"
   },
   "devDependencies": {
     "chai": "3.5.0",
+    "coveralls": "2.11.12",
     "eslint": "3.4.0",
     "eslint-config-loris": "5.1.0",
     "git-hooks": "1.1.0",
     "istanbul": "0.4.5",
-    "mocha": "3.0.2"
+    "mocha": "3.0.2",
+    "mocha-lcov-reporter": "1.2.0"
   }
 }
