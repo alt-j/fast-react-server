@@ -5,7 +5,7 @@
 [![devDependencies Status](https://david-dm.org/alt-j/react-server/dev-status.svg)](https://david-dm.org/alt-j/react-server?type=dev)
 [![Coverage Status](https://coveralls.io/repos/github/alt-j/react-server/badge.svg?branch=master)](https://coveralls.io/github/alt-j/react-server?branch=master)
 
-The module for rendering react-element in the server **12 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
+The module for rendering react-element in the server **15 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
 
 ## Quick start
 ```sh
@@ -32,6 +32,3 @@ Example with using LRU cache: [render with LRU cache](examples/cache-render.js) 
 
 ## What's inside?
 High speed mock for react, which doesn't use any abstraction and transform all of your declarations to html (string) generators.
-
-For the sake of speed, wasn't implemented some features:
-- Context.
