@@ -1,4 +1,4 @@
-var sha1 = require('crypto').createHash('sha1');
+var uuid = require('uuid');
 
 var extend = require('./utils/extend');
 var elementToString = require('./render');
@@ -28,8 +28,8 @@ module.exports = {
         var mixins = Array.isArray(decl.mixins) ? decl.mixins : [];
         var instanceBlank = extend.apply(this, mixins.concat([decl, executedDecl]));
 
-        var hasComponentCache = typeof decl.getCacheKey === 'function';
-        var componentCachePrefix = hasComponentCache ? sha1.update(JSON.stringify(decl)).digest('hex') : '';
+        var hasCache = typeof decl.getCacheKey === 'function';
+        var cachePrefix = (decl.displayName || uuid.v1()) + '_';
 
         /**
          * @param {Object} [props] Properties list.
@@ -49,18 +49,16 @@ module.exports = {
             }
 
             var cache = options.cache;
-            var cacheKey = cache && hasComponentCache ? componentCachePrefix + instance.getCacheKey() : null;
+            var cacheKey = cache && hasCache ? cachePrefix + instance.getCacheKey() : null;
 
             if (cacheKey && cache.has(cacheKey)) {
                 return cache.get(cacheKey);
             }
 
-            var context = typeof instance.getChildContext === 'function' ?
-                extend(instance.context, instance.getChildContext()) : null;
-
             var html = elementToString(instance.render(), {
                 cache: cache,
-                context: context
+                context: typeof instance.getChildContext === 'function' ?
+                    extend(instance.context, instance.getChildContext()) : instance.context
             });
 
             if (cacheKey) {

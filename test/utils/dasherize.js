@@ -1,6 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
-var dasherize = require('../../utils/dasherize');
+var dasherize = require('../../src/utils/dasherize');
 
 describe('dasherize', function () {
     it('should be a function', function () {

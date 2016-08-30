@@ -9,6 +9,8 @@ var cache = LRU({
 // All declarations must be transformed from jsx to js.
 // Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
 var Component = React.createClass({
+    displayName: 'Component',
+
     getDefaultProps: function () {
         return {
             content: 'Some <b>bold</b> text'

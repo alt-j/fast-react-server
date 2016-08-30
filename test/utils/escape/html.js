@@ -1,6 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
-var html = require('../../../utils/escape/html');
+var html = require('../../../src/utils/escape/html');
 
 describe('html', function () {
     it('should be a function', function () {

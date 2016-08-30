@@ -1,6 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
-var extend = require('../../utils/extend');
+var extend = require('../../src/utils/extend');
 
 var str = 'me a test';
 var integer = 10;

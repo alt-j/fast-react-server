@@ -26,7 +26,7 @@
     "test": "npm run lint && npm run test-cov",
     "test-cov": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive --check-leaks",
     "test-coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "lint": "./node_modules/.bin/eslint . --quiet --ignore-path .gitignore"
+    "lint": "./node_modules/.bin/eslint . --quiet"
   },
   "devDependencies": {
     "chai": "3.5.0",
@@ -38,5 +38,8 @@
     "mocha": "3.0.2",
     "mocha-lcov-reporter": "1.2.0",
     "lru-cache": "4.0.1"
+  },
+  "dependencies": {
+    "uuid": "2.0.2"
   }
 }

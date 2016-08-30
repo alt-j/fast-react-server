@@ -1,6 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
-var React = require('../index');
+var React = require('../src/index');
 
 describe('React', function () {
     describe('createClass', function () {

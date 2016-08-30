@@ -2,30 +2,49 @@ var React = require('../src/index');
 
 // All declarations must be transformed from jsx to js.
 // Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
-var Component = React.createClass({
+var ComponentInner = React.createClass({
     render: function () {
-        return React.createElement('div', {
-            className: 'text',
-            dangerouslySetInnerHTML: {__html: this.context.content}
-        });
+        return React.createElement('span', {className: 'final'}, this.context.counter);
+    }
+});
+
+var Component = React.createClass({
+    getChildContext: function () {
+        return {
+            counter: this.context.counter + 1
+        };
+    },
+
+    render: function () {
+        return React.createElement(
+            'span',
+            null,
+            this.context.counter + ', ',
+            React.createElement(ComponentInner)
+        );
     }
 });
 
 var ComponentWrapper = React.createClass({
     getDefaultProps: function () {
         return {
-            content: 'Some <b>bold</b> text'
+            content: 'Chain: 0, '
         };
     },
 
     getChildContext: function () {
         return {
-            content: this.props.content
+            counter: 1
         };
     },
 
     render: function () {
-        return React.createElement(Component);
+        return React.createElement(
+            'div',
+            {},
+            this.props.content,
+            React.createElement(Component)
+        );
     }
 });
 

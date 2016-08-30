@@ -1,6 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
-var attr = require('../../../utils/escape/attr');
+var attr = require('../../../src/utils/escape/attr');
 
 describe('attr', function () {
     it('should be a function', function () {

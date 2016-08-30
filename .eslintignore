@@ -1,1 +1,2 @@
-**/i-*.js
+src/interfaces/*
+coverage
