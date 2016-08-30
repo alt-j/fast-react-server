@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/alt-j/react-server.svg?branch=master)](https://travis-ci.org/alt-j/react-server)
 [![dependencies Status](https://david-dm.org/alt-j/react-server/status.svg)](https://david-dm.org/alt-j/react-server)
 [![devDependencies Status](https://david-dm.org/alt-j/react-server/dev-status.svg)](https://david-dm.org/alt-j/react-server?type=dev)
-[![Coverage Status](https://coveralls.io/repos/github/alt-j/react-server/badge.svg)](https://coveralls.io/github/alt-j/react-server)
+[![Coverage Status](https://coveralls.io/repos/github/alt-j/react-server/badge.svg?branch=master)](https://coveralls.io/github/alt-j/react-server?branch=master)
 
 The module for rendering react-element in the server **12 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
 
