@@ -16,17 +16,15 @@ module.exports = {
      * @returns {Function} render
      */
     createClass: function (decl) {
-        var executedDecl = {
-            props: decl.getDefaultProps ? decl.getDefaultProps() : {},
-            state: decl.getInitialState ? decl.getInitialState() : {},
-
-            setState: function (data) {
-                this.state = extend(this.state, data);
-            }
-        };
-
         var mixins = Array.isArray(decl.mixins) ? decl.mixins : [];
-        var instanceBlank = extend.apply(this, mixins.concat([decl, executedDecl]));
+        var blank = extend.apply(this, mixins.concat([decl]));
+
+        blank.props = blank.getDefaultProps ? blank.getDefaultProps() : {};
+        blank.state = blank.getInitialState ? blank.getInitialState() : {};
+
+        blank.setState = function (data) {
+            this.state = extend(this.state, data);
+        };
 
         var hasCache = typeof decl.getCacheKey === 'function';
         var cachePrefix = (decl.displayName || uuid.v1()) + '_';
@@ -39,7 +37,7 @@ module.exports = {
          * @returns {String} html
          */
         return function (props, options) {
-            var instance = extend(instanceBlank);
+            var instance = extend(blank);
 
             instance.props = extend(instance.props, props);
             instance.context = (options && options.context) || {};
