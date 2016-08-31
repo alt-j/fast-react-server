@@ -1,4 +1,4 @@
-# [React] Server render
+# React Server
 
 [![Build Status](https://travis-ci.org/alt-j/react-server.svg?branch=master)](https://travis-ci.org/alt-j/react-server)
 [![dependencies Status](https://david-dm.org/alt-j/react-server/status.svg)](https://david-dm.org/alt-j/react-server)
@@ -9,11 +9,11 @@ The module for rendering react-element in the server **15 times as fast** (see [
 
 ## Quick start
 ```sh
-npm install react-server-rendering
+npm install fast-react-server
 ```
 
 ```js
-var React = require('react-server-rendering');
+var React = require('fast-react-server');
 
 var element = React.createElement(Component, {property: 'value'});
 console.log(React.renderToString(element));

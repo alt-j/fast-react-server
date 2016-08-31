@@ -1,11 +1,11 @@
 {
-  "name": "react-server-rendering",
+  "name": "fast-react-server",
   "version": "0.0.10",
-  "description": "Fast server react rendering (advanced performance render)",
+  "description": "Fast server react (advanced performance render)",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alt-j/react-server-rendering.git"
+    "url": "git+https://github.com/alt-j/fast-react-server.git"
   },
   "keywords": [
     "react",
