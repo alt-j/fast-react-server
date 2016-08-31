@@ -21,7 +21,7 @@ var element = React.createElement(
     }),
     {text: 'some text'}
 );
-console.log(ReactRender.renderToString(element));
+console.log(ReactRender.elementToString(element));
 ```
 
 If you want use it, you must remember:

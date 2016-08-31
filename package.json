@@ -17,7 +17,7 @@
     "cache",
     "html"
   ],
-  "author": "Andrey Morozov <alt-j@yandex-team.ru>",
+  "author": "Andrey Morozov <altjs@ya.ru>",
   "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
