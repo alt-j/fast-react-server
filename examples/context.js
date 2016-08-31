@@ -1,4 +1,5 @@
 var React = require('../src/index');
+var ReactRender = require('fast-react-render');
 
 // All declarations must be transformed from jsx to js.
 // Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
@@ -28,7 +29,7 @@ var Component = React.createClass({
 var ComponentWrapper = React.createClass({
     getDefaultProps: function () {
         return {
-            content: 'Chain: 0, '
+            content: 'Chain: '
         };
     },
 
@@ -42,11 +43,19 @@ var ComponentWrapper = React.createClass({
         return React.createElement(
             'div',
             {},
-            this.props.content,
+            this.props.content + this.context.counter + ', ',
             React.createElement(Component)
         );
     }
 });
 
-var element = React.createElement(ComponentWrapper);
-console.log(React.renderToString(element));
+console.log(
+    ReactRender.elementToString(
+        React.createElement(ComponentWrapper),
+        {
+            context: {
+                counter: 0
+            }
+        }
+    )
+);

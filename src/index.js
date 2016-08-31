@@ -1,19 +1,9 @@
-var uuid = require('uuid');
-
 var extend = require('./utils/extend');
-var elementToString = require('./render');
-
-/**
- * @typedef {Object} RenderElement
- * @property {Function|String} element.component Renderer function or name of tag.
- * @property {Object} element.props Properties list.
- * @property {String[]|String[][]|Number[]|Number[][]} element.children Children.
- */
 
 module.exports = {
     /**
      * @param {Object} decl React component declaration.
-     * @returns {Function} render
+     * @returns {Function}
      */
     createClass: function (decl) {
         var mixins = Array.isArray(decl.mixins) ? decl.mixins : [];
@@ -26,54 +16,32 @@ module.exports = {
             this.state = extend(this.state, data);
         };
 
-        var hasCache = typeof decl.getCacheKey === 'function';
-        var cachePrefix = (decl.displayName || uuid.v1()) + '_';
-
         /**
-         * @param {Object} [props] Properties list.
-         * @param {Object} [options]
-         * @param {ICache} [options.cache] Cache instance.
-         * @param {Object} [options.context] Render context.
-         * @returns {String} html
+         * @param {Object} [props]
+         * @param {Object} [context]
+         * @returns {Function}
          */
-        return function (props, options) {
+        return function (props, context) {
             var instance = extend(blank);
 
             instance.props = extend(instance.props, props);
-            instance.context = (options && options.context) || {};
+            instance.context = context;
 
             if (instance.componentWillMount) {
                 instance.componentWillMount();
             }
 
-            var cache = options.cache;
-            var cacheKey = cache && hasCache ? cachePrefix + instance.getCacheKey() : null;
-
-            if (cacheKey && cache.has(cacheKey)) {
-                return cache.get(cacheKey);
-            }
-
-            var html = elementToString(instance.render(), {
-                cache: cache,
-                context: typeof instance.getChildContext === 'function' ?
-                    extend(instance.context, instance.getChildContext()) : instance.context
-            });
-
-            if (cacheKey) {
-                cache.set(cacheKey, html);
-            }
-
-            return html;
+            return instance;
         };
     },
 
     /**
-     * @param {Function|String} component Renderer function or name of tag.
-     * @param {Object} [props] Properties list.
-     * @param {String} [child] Child.
+     * @param {Function|String} type
+     * @param {Object} [props]
+     * @param {...String} [child]
      * @returns {RenderElement} element
      */
-    createElement: function (component, props, child) {
+    createElement: function (type, props, child) {
         var children = [];
 
         var i = arguments.length;
@@ -82,19 +50,8 @@ module.exports = {
         }
 
         return {
-            component: component,
-
-            props: props || {},
-            children: children
+            type: type,
+            props: extend(props, {children: children})
         };
-    },
-
-    /**
-     * @param {RenderElement} element
-     * @param {ICache} [cache]
-     * @returns {String} html
-     */
-    renderToString: function (element, cache) {
-        return elementToString(element, {cache: cache});
     }
 };

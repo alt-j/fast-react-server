@@ -33,13 +33,11 @@
     "coveralls": "2.11.12",
     "eslint": "3.4.0",
     "eslint-config-loris": "5.1.0",
+    "fast-react-render": "0.0.2",
     "git-hooks": "1.1.0",
     "istanbul": "0.4.5",
+    "lru-cache": "4.0.1",
     "mocha": "3.0.2",
-    "mocha-lcov-reporter": "1.2.0",
-    "lru-cache": "4.0.1"
-  },
-  "dependencies": {
-    "uuid": "2.0.2"
+    "mocha-lcov-reporter": "1.2.0"
   }
 }

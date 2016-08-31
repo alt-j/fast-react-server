@@ -1,4 +1,5 @@
 var React = require('../src/index');
+var ReactRender = require('fast-react-render');
 
 var LRU = require('lru-cache');
 var cache = LRU({
@@ -30,19 +31,16 @@ var Component = React.createClass({
 });
 
 console.log(
-    React.renderToString(
+    ReactRender.elementToString(
         React.createElement(Component),
-        cache
+        {cache: cache}
     )
 );
 
 // Render from cache
 console.log(
-    React.renderToString(
-        React.createElement(
-            Component,
-            {content: 'Some <b>bold</b> text'}
-        ),
-        cache
+    ReactRender.elementToString(
+        React.createElement(Component, {content: 'Some <b>bold</b> text'}),
+        {cache: cache}
     )
 );

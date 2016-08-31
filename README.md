@@ -1,34 +1,39 @@
-# React Server
+# React Server [![Build Status](https://travis-ci.org/alt-j/fast-react-server.svg?branch=master)](https://travis-ci.org/alt-j/react-server)
 
-[![Build Status](https://travis-ci.org/alt-j/react-server.svg?branch=master)](https://travis-ci.org/alt-j/react-server)
-[![dependencies Status](https://david-dm.org/alt-j/react-server/status.svg)](https://david-dm.org/alt-j/react-server)
-[![devDependencies Status](https://david-dm.org/alt-j/react-server/dev-status.svg)](https://david-dm.org/alt-j/react-server?type=dev)
-[![Coverage Status](https://coveralls.io/repos/github/alt-j/react-server/badge.svg?branch=master)](https://coveralls.io/github/alt-j/react-server?branch=master)
-
-The module for rendering react-element in the server **15 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
+It's high speed react mock for server rendering.
+You can use it with [fast react render](https://github.com/alt-j/fast-react-render), in that case render will be **15 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
 
 ## Quick start
 ```sh
+npm install fast-react-render
 npm install fast-react-server
 ```
 
 ```js
 var React = require('fast-react-server');
+var ReactRender = require('fast-react-render');
 
-var element = React.createElement(Component, {property: 'value'});
-console.log(React.renderToString(element));
+var element = React.createElement(
+    React.createClass({
+        render: function () {
+            return React.createElement('div', {}, this.props.text);
+        }
+    }),
+    {text: 'some text'}
+);
+console.log(ReactRender.renderToString(element));
 ```
+
+If you want use it, you must remember:
+
+1. each component, which you want render, you must declared with this mock (configure you build system for that);
+2. all propTypes must be removed (in case of babel, you can use [transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) for this).
 
 See examples of using: [examples](examples/).
 
 ## Cache
+Fast react server support cache for component which implement in [fast react render](https://github.com/alt-j/fast-react-render).
+See how it use [here](https://github.com/alt-j/fast-react-render#cache).
 
-React server rendering support cache for component.
-
-First of all, you must choose cache system. It can be any system, which implement ICache interface ([interface](src/interfaces/i-cache.js)).
-For caching, component must implement ICacheableComponent interface ([interface](src/interfaces/i-cacheable-component.js)).
-
-Example with using LRU cache: [render with LRU cache](examples/cache-render.js) (install `lru-cache` package first).
-
-## What's inside?
-High speed mock for react, which doesn't use any abstraction and transform all of your declarations to html (string) generators.
+## Future
+Today we doesn't support [ES6 classes](https://facebook.github.io/react/docs/reusable-components.html#es6-classes) and [Stateless Functions](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions), but we'll do it [soon](issues/10).

@@ -1,4 +1,5 @@
 var React = require('../src/index');
+var ReactRender = require('fast-react-render');
 
 // All declarations must be transformed from jsx to js.
 // Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
@@ -18,4 +19,4 @@ var Component = React.createClass({
 });
 
 var element = React.createElement(Component);
-console.log(React.renderToString(element));
+console.log(ReactRender.elementToString(element));
