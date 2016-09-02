@@ -18,14 +18,14 @@ module.exports = {
             this.state = extend(this.state, data);
         };
 
-        var defaultProps = proto.getDefaultProps ? proto.getDefaultProps() : {};
-
         var Component = function (props, context) {
-            this.props = extend(defaultProps, props);
-            this.state = this.getInitialState ? this.getInitialState() : {};
+            this.props = props;
             this.context = context;
+
+            this.state = this.getInitialState ? this.getInitialState() : {};
         };
 
+        Component.defaultProps = proto.getDefaultProps ? proto.getDefaultProps() : {};
         Component.prototype = extend(proto);
 
         return Component;
