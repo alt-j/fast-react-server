@@ -1,38 +1,34 @@
 var extend = require('./utils/extend');
 
 module.exports = {
+    Component: function (props, context) {
+        this.props = props;
+        this.context = context;
+    },
+
     /**
      * @param {Object} decl React component declaration.
      * @returns {Function}
      */
     createClass: function (decl) {
         var mixins = Array.isArray(decl.mixins) ? decl.mixins : [];
-        var blank = extend.apply(this, mixins.concat([decl]));
+        var proto = extend.apply(this, mixins.concat([decl]));
 
-        blank.props = blank.getDefaultProps ? blank.getDefaultProps() : {};
-        blank.state = blank.getInitialState ? blank.getInitialState() : {};
-
-        blank.setState = function (data) {
+        proto.setState = function (data) {
             this.state = extend(this.state, data);
         };
 
-        /**
-         * @param {Object} [props]
-         * @param {Object} [context]
-         * @returns {Function}
-         */
-        return function (props, context) {
-            var instance = extend(blank);
+        var defaultProps = proto.getDefaultProps ? proto.getDefaultProps() : {};
 
-            instance.props = extend(instance.props, props);
-            instance.context = context;
-
-            if (instance.componentWillMount) {
-                instance.componentWillMount();
-            }
-
-            return instance;
+        var Component = function (props, context) {
+            this.props = extend(defaultProps, props);
+            this.state = this.getInitialState ? this.getInitialState() : {};
+            this.context = context;
         };
+
+        Component.prototype = extend(proto);
+
+        return Component;
     },
 
     /**
@@ -51,7 +47,7 @@ module.exports = {
 
         return {
             type: type,
-            props: extend(props, {children: children})
+            props: extend(type && type.defaultProps, props, {children: children})
         };
     }
 };

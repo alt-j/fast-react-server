@@ -29,11 +29,10 @@ If you want use it, you must remember:
 1. each component, which you want render, you must declared with this mock (configure you build system for that);
 2. all propTypes must be removed (in case of babel, you can use [transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) for this).
 
-See examples of using: [examples](examples/).
+Also fast react server support [ES6 classes](https://facebook.github.io/react/docs/reusable-components.html#es6-classes) and [Stateless Functions](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) (see examples: [es6](examples/es6.jsx) and [stateless-function](examples/stateless-function.js)).
+
+See more examples of using: [examples](examples/).
 
 ## Cache
 Fast react server support cache for component which implement in [fast react render](https://github.com/alt-j/fast-react-render).
 See how it use [here](https://github.com/alt-j/fast-react-render#cache).
-
-## Future
-Today we doesn't support [ES6 classes](https://facebook.github.io/react/docs/reusable-components.html#es6-classes) and [Stateless Functions](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions), but we'll do it [soon](issues/10).

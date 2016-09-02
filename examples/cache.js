@@ -7,7 +7,7 @@ var cache = LRU({
     maxAge: 60 * 60
 });
 
-// All declarations must be transformed from jsx to js.
+// Transform all es6 to es5 and jsx to js, before execution.
 // Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
 var Component = React.createClass({
     displayName: 'Component',
