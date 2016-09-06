@@ -5,8 +5,7 @@ You can use it with [fast react render](https://github.com/alt-j/fast-react-rend
 
 ## Quick start
 ```sh
-npm install fast-react-render
-npm install fast-react-server
+npm install fast-react-render fast-react-server
 ```
 
 ```js
@@ -31,7 +30,9 @@ If you want use it, you must remember:
 
 Also fast react server support [ES6 classes](https://facebook.github.io/react/docs/reusable-components.html#es6-classes) and [Stateless Functions](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) (see examples: [es6](examples/es6.jsx) and [stateless-function](examples/stateless-function.js)).
 
-See more examples of using: [examples](examples/).
+More examples:
+- tiny [seed project](https://github.com/alt-j/fast-react-seed) (in progress);
+- [examples](examples/) for main features.
 
 ## Cache
 Fast react server support cache for component which implement in [fast react render](https://github.com/alt-j/fast-react-render).
