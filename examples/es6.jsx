@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import React from  '../src/index';
 import ReactRender from 'fast-react-render';
 

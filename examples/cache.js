@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 var React = require('../src/index');
 var ReactRender = require('fast-react-render');
 

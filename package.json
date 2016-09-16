@@ -32,7 +32,7 @@
   "devDependencies": {
     "chai": "3.5.0",
     "coveralls": "2.11.12",
-    "eslint": "3.4.0",
+    "eslint": "2.5.3",
     "eslint-config-loris": "5.1.0",
     "fast-react-render": "1.0.4",
     "git-hooks": "1.1.0",
