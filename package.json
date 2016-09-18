@@ -1,6 +1,6 @@
 {
   "name": "fast-react-server",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Fast server react (advanced performance render)",
   "main": "src/index.js",
   "repository": {
