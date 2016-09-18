@@ -1,7 +1,7 @@
 # React Server [![Build Status](https://travis-ci.org/alt-j/fast-react-server.svg?branch=master)](https://travis-ci.org/alt-j/react-server) [![Coverage Status](https://coveralls.io/repos/github/alt-j/fast-react-server/badge.svg?branch=master)](https://coveralls.io/github/alt-j/fast-react-server?branch=master)
 
 It's high speed react mock for server rendering.
-You can use it with [fast react render](https://github.com/alt-j/fast-react-render), in that case render will be **14 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
+You can use it with [fast react render](https://github.com/alt-j/fast-react-render), in that case render will be **12 times as fast** (see [benchmarks](https://github.com/alt-j/react-server-benchmark)) as [traditional react rendering](https://facebook.github.io/react/docs/environments.html) (in production mode).
 
 ## Quick start
 ```sh
