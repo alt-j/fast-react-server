@@ -23,10 +23,7 @@ var element = React.createElement(
 console.log(ReactRender.elementToString(element));
 ```
 
-If you want use it, you must remember:
-
-1. each component, which you want render, you must declared with this mock (configure you build system for that);
-2. all propTypes must be removed (in case of babel, you can use [transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) for this).
+If you want use it, you must remember: each component, which you want render, you must declared with this mock (configure you build system for that).
 
 Also fast react server support [ES6 classes](https://facebook.github.io/react/docs/reusable-components.html#es6-classes) and [Stateless Functions](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) (see examples: [es6](examples/es6.jsx) and [stateless-function](examples/stateless-function.js)).
 

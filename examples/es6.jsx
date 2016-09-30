@@ -4,7 +4,6 @@ import React from  '../src/index';
 import ReactRender from 'fast-react-render';
 
 // Transform all es6 to es5 and jsx to js, before execution.
-// Also you must remove all propTypes (in case of babel, you can use transform-react-remove-prop-types).
 class Text extends React.Component {
     constructor(props) {
         super(props);

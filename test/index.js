@@ -1,5 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
+
 var React = require('../src/index');
 
 describe('React', function () {

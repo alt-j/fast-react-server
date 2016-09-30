@@ -1,3 +1,5 @@
+var PropTypes = require('prop-types');
+
 var children = require('./utils/children');
 var extend = require('./utils/extend');
 
@@ -8,6 +10,8 @@ module.exports = {
     },
 
     Children: children,
+
+    PropTypes: PropTypes,
 
     /**
      * @param {Object} decl React component declaration.
