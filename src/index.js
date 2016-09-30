@@ -1,3 +1,4 @@
+var children = require('./utils/children');
 var extend = require('./utils/extend');
 
 module.exports = {
@@ -5,6 +6,8 @@ module.exports = {
         this.props = props;
         this.context = context;
     },
+
+    Children: children,
 
     /**
      * @param {Object} decl React component declaration.
