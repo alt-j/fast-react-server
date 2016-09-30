@@ -53,5 +53,22 @@ module.exports = {
             type: type,
             props: extend(type && type.defaultProps, props, {children: children})
         };
+    },
+
+    /**
+     * @param {RenderElement} element
+     * @param {Object} [props]
+     * @param {...String} [child]
+     * @returns {RenderElement} newElement
+     */
+    cloneElement: function (element, props) {
+        var newArgs = [element.type, extend(element.props, props)];
+
+        var i = arguments.length;
+        while (i-- > 2) {
+            newArgs[i] = arguments[i];
+        }
+
+        return this.createElement.apply(this, newArgs);
     }
 };

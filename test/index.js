@@ -116,14 +116,55 @@ describe('React', function () {
         });
 
         it('should put children to props', function () {
-            var element = React.createElement('div', null, 'child 1', 'child 2');
+            var element = React.createElement('div', null, 'first child', 'second child');
 
-            expect(element.props.children[0]).to.equal('child 1');
-            expect(element.props.children[1]).to.equal('child 2');
+            expect(element.props.children[0]).to.equal('first child');
+            expect(element.props.children[1]).to.equal('second child');
         });
 
         it('should put all arguments starting from the second to children', function () {
             var element = React.createElement('div', null, 'first child', 'second child', 'third child');
+            expect(element.props.children.length).to.equal(3);
+
+            expect(element.props.children[0]).to.equal('first child');
+            expect(element.props.children[1]).to.equal('second child');
+            expect(element.props.children[2]).to.equal('third child');
+        });
+    });
+
+    describe('cloneElement', function () {
+        it('should be a function', function () {
+            expect(React.cloneElement).to.be.a('function');
+        });
+
+        it('should transfer to element all props', function () {
+            var originalElement = React.createElement('div', {a: 1, b: 2});
+            var element = React.cloneElement(originalElement);
+
+            expect(element.props.a).to.equal(1);
+            expect(element.props.b).to.equal(2);
+        });
+
+        it('should mix props from original element and from params', function () {
+            var originalElement = React.createElement('div', {a: 1, b: 2});
+            var element = React.cloneElement(originalElement, {b: 3, c: 4});
+
+            expect(element.props.a).to.equal(1);
+            expect(element.props.b).to.equal(3);
+            expect(element.props.c).to.equal(4);
+        });
+
+        it('should replace existing children', function () {
+            var originalElement = React.createElement('div', null, 'original child');
+            var element = React.cloneElement(originalElement, null, 'child');
+
+            expect(element.props.children).to.equal('child');
+        });
+
+        it('should put all arguments starting from the second to children', function () {
+            var originalElement = React.createElement('div', null);
+            var element = React.cloneElement(originalElement, null, 'first child', 'second child', 'third child');
+
             expect(element.props.children.length).to.equal(3);
 
             expect(element.props.children[0]).to.equal('first child');
