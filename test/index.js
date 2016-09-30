@@ -110,9 +110,16 @@ describe('React', function () {
             expect(element.props.b).to.equal(2);
         });
 
-        it('should put children to props', function () {
+        it('should put child to props', function () {
             var element = React.createElement('div', null, 'child');
-            expect(element.props.children[0]).to.equal('child');
+            expect(element.props.children).to.equal('child');
+        });
+
+        it('should put children to props', function () {
+            var element = React.createElement('div', null, 'child 1', 'child 2');
+
+            expect(element.props.children[0]).to.equal('child 1');
+            expect(element.props.children[1]).to.equal('child 2');
         });
 
         it('should put all arguments starting from the second to children', function () {
@@ -122,13 +129,6 @@ describe('React', function () {
             expect(element.props.children[0]).to.equal('first child');
             expect(element.props.children[1]).to.equal('second child');
             expect(element.props.children[2]).to.equal('third child');
-        });
-
-        it('should put to props.children empty array', function () {
-            var children = React.createElement('div').props.children;
-
-            expect(Array.isArray(children)).to.equal(true);
-            expect(children.length).to.equal(0);
         });
     });
 });

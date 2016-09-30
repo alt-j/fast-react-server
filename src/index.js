@@ -38,11 +38,15 @@ module.exports = {
      * @returns {RenderElement} element
      */
     createElement: function (type, props, child) {
-        var children = [];
+        var children = child;
 
         var i = arguments.length;
-        while (i-- > 2) {
-            children[i - 2] = arguments[i];
+        if (i > 3) {
+            children = [];
+
+            while (i-- > 2) {
+                children[i - 2] = arguments[i];
+            }
         }
 
         return {
