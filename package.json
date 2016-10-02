@@ -24,8 +24,8 @@
   },
   "scripts": {
     "test": "npm run lint && npm run test-cov",
-    "test-cov": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive --check-leaks",
-    "test-coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec --recursive --check-leaks && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "test-cov": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec --recursive --check-leaks",
+    "test-coveralls": "npm run test-cov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint": "./node_modules/.bin/eslint . --quiet",
     "benchmark": "node ./tools/benchmark"
   },
