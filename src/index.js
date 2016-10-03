@@ -3,7 +3,7 @@ var PropTypes = require('prop-types');
 var children = require('./utils/children');
 var extend = require('./utils/extend');
 
-module.exports = {
+var FastReactServer = {
     Component: function (props, context) {
         this.props = props;
         this.context = context;
@@ -79,3 +79,8 @@ module.exports = {
         return this.createElement.apply(this, newArgs);
     }
 };
+
+FastReactServer.PropTypes.element = FastReactServer.PropTypes.instanceOf(FastReactServer.Component);
+FastReactServer.PropTypes.node = FastReactServer.PropTypes.object;
+
+module.exports = FastReactServer;
