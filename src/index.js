@@ -33,6 +33,13 @@ var FastReactServer = {
         };
 
         Component.defaultProps = proto.getDefaultProps ? proto.getDefaultProps() : {};
+
+        if (decl.statics) {
+            for (var method in decl.statics) {
+                Component[method] = decl.statics[method];
+            }
+        }
+
         Component.prototype = extend(proto);
 
         return Component;

@@ -38,6 +38,19 @@ describe('React', function () {
             expect(instance.render).to.equal(decl.render);
         });
 
+        it('should transfer method and property from decl.statics to class', function () {
+            var decl = {
+                statics: {
+                    someProperty: 1,
+                    someMethod: function () {}
+                }
+            };
+            var SomeClass = React.createClass(decl);
+
+            expect(SomeClass.someProperty).to.equal(decl.statics.someProperty);
+            expect(SomeClass.someMethod).to.equal(decl.statics.someMethod);
+        });
+
         it('should execute getDefaultProps method and put result to static component field', function () {
             var defaultProps = {a: 1};
             var Component = React.createClass({
