@@ -52,7 +52,7 @@ var FastReactServer = {
      * @returns {RenderElement} element
      */
     createElement: function (type, props, child) {
-        var children = child;
+        var children = child || props && props.children;
 
         var i = arguments.length;
         if (i > 3) {

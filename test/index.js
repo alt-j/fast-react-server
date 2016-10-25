@@ -144,6 +144,11 @@ describe('React', function () {
             expect(element.props.children[1]).to.equal('second child');
             expect(element.props.children[2]).to.equal('third child');
         });
+
+        it('should not overwrite children from props in case of third argument is undefined', function () {
+            var element = React.createElement('div', {children: 'child'});
+            expect(element.props.children).to.equal('child');
+        });
     });
 
     describe('cloneElement', function () {
@@ -184,6 +189,13 @@ describe('React', function () {
             expect(element.props.children[0]).to.equal('first child');
             expect(element.props.children[1]).to.equal('second child');
             expect(element.props.children[2]).to.equal('third child');
+        });
+
+        it('should retain children from original element', function () {
+            var originalElement = React.createElement('div', null, 'child');
+            var element = React.cloneElement(originalElement);
+
+            expect(element.props.children).to.equal('child');
         });
     });
 });
