@@ -84,6 +84,15 @@ var FastReactServer = {
         }
 
         return this.createElement.apply(this, newArgs);
+    },
+
+    /**
+     * @param {RenderElement} element
+     * @returns {boolean} isValid
+     */
+    isValidElement: function (element) {
+        return element === null ||
+            (typeof element === 'object' && typeof element.type !== 'undefined' && typeof element.props === 'object');
     }
 };
 
