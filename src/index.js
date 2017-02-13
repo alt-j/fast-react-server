@@ -87,6 +87,7 @@ var FastReactServer = {
     }
 };
 
+FastReactServer.PureComponent = FastReactServer.Component;
 FastReactServer.PropTypes.element = FastReactServer.PropTypes.instanceOf(FastReactServer.Component);
 FastReactServer.PropTypes.node = FastReactServer.PropTypes.object;
 
