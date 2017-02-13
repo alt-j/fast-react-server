@@ -20,6 +20,22 @@ describe('React', function () {
         });
     });
 
+    describe('PureComponent', function () {
+        it('should be a function', function () {
+            expect(React.PureComponent).to.be.a('function');
+        });
+
+        it('should transform params to fields', function () {
+            var props = {a: 1};
+            var context = {b: 2};
+
+            var component = new React.PureComponent(props, context);
+
+            expect(component.props).to.equal(props);
+            expect(component.context).to.equal(context);
+        });
+    });
+
     describe('createClass', function () {
         it('should be a function', function () {
             expect(React.createClass).to.be.a('function');
