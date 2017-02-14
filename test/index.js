@@ -214,4 +214,27 @@ describe('React', function () {
             expect(element.props.children).to.equal('child');
         });
     });
+
+    describe('isValidElement', function () {
+        it('should be a function', function () {
+            expect(React.isValidElement).to.be.a('function');
+        });
+
+        it('should validate null', function () {
+            expect(React.isValidElement(null)).to.equal(true);
+        });
+
+        it('should validate object with type and props', function () {
+            expect(React.isValidElement({type: React.Component, props: {}})).to.equal(true);
+        });
+
+        it('should not validate other stuff', function () {
+            expect(React.isValidElement({})).to.equal(false);
+            expect(React.isValidElement({type: {}})).to.equal(false);
+            expect(React.isValidElement({props: {}})).to.equal(false);
+            expect(React.isValidElement(1)).to.equal(false);
+            expect(React.isValidElement([])).to.equal(false);
+            expect(React.isValidElement()).to.equal(false);
+        });
+    });
 });
