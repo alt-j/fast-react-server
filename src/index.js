@@ -2,6 +2,7 @@ var PropTypes = require('prop-types');
 
 var children = require('./utils/children');
 var extend = require('./utils/extend');
+var isObject = require('./utils/isObject');
 
 var FastReactServer = {
     Component: function (props, context) {
@@ -87,12 +88,12 @@ var FastReactServer = {
     },
 
     /**
-     * @param {RenderElement} element
-     * @returns {boolean} isValid
+     * @param {*} element
+     * @returns {Boolean} isValid
      */
     isValidElement: function (element) {
         return element === null ||
-            (typeof element === 'object' && typeof element.type !== 'undefined' && typeof element.props === 'object');
+            (isObject(element) && element.hasOwnProperty('type') && isObject(element.props));
     }
 };
 
