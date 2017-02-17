@@ -69,8 +69,7 @@ module.exports = {
 
         var childrenArray = toArray(children);
 
-        var i = childrenArray.length;
-        while (--i >= 0) {
+        for (var i = 0; i < childrenArray.length; i++) {
             callback.call(thisArg || this, childrenArray[i], i);
         }
     }
