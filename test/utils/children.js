@@ -144,13 +144,22 @@ describe('children', function () {
             expect(result).to.deep.equal([0]);
         });
 
+        it('should iterate from first to last', function () {
+            var result = [];
+            children.forEach(twoInArray, function (child, index) {
+                result.push(child);
+            });
+
+            expect(result).to.deep.equal(twoInArray);
+        });
+
         it('should map children', function () {
             var result = [];
             children.forEach(twoInArray, function (child, index) {
                 result.push(index);
             });
 
-            expect(result).to.deep.equal([1, 0]);
+            expect(result).to.deep.equal([0, 1]);
         });
 
         it('should apply specific context', function () {
