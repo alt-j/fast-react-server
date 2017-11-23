@@ -1,3 +1,6 @@
+ With the release of the new version [React](https://reactjs.org/blog/2017/09/26/react-v16.0.html#better-server-side-rendering) and Node.js the performance issue has ceased to be so acute. Use last versions of React and Node.js for better performance.
+======
+
 # React Server [![Build Status](https://travis-ci.org/alt-j/fast-react-server.svg?branch=master)](https://travis-ci.org/alt-j/react-server) [![Coverage Status](https://coveralls.io/repos/github/alt-j/fast-react-server/badge.svg?branch=master)](https://coveralls.io/github/alt-j/fast-react-server?branch=master)
 
 It's high speed react mock for server rendering.
